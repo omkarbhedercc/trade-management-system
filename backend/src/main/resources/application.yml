@@ -1,0 +1,24 @@
+server:
+  port: 6001
+
+spring:
+  application:
+    name: tms-backend
+  datasource:
+    url: jdbc:postgresql://localhost:6002/tms_dev
+    username: tms
+    password: tms
+    driver-class-name: org.postgresql.Driver
+    # Run schema.sql + data.sql against the (non-embedded) Postgres datasource.
+    initialization-mode: always
+    platform: postgresql
+  jpa:
+    hibernate:
+      # Schema is owned by schema.sql (script init runs before Hibernate in Boot 2.3.x),
+      # so Hibernate only validates entity mappings against it.
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false

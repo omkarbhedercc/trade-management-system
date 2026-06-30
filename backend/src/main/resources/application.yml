@@ -1,11 +1,11 @@
 server:
-  port: 6001
+  port: 4001
 
 spring:
   application:
     name: tms-backend
   datasource:
-    url: jdbc:postgresql://localhost:6002/tms_dev
+    url: jdbc:postgresql://localhost:4002/tms_dev
     username: tms
     password: tms
     driver-class-name: org.postgresql.Driver

@@ -5,7 +5,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * Allow the React dev server (default :6000, plus common alternates) to call the API.
+ * Allow the React dev server (default :4000, plus common alternates) to call the API.
  */
 @Configuration
 public class CorsConfig implements WebMvcConfigurer {
@@ -14,8 +14,8 @@ public class CorsConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
                 .allowedOrigins(
-                        "http://localhost:6000",
-                        "http://localhost:6010",
+                        "http://localhost:4000",
+                        "http://localhost:4010",
                         "http://localhost:3000")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*");

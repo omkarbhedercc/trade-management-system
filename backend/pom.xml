@@ -90,6 +90,13 @@
             <version>3.2.1</version>
         </dependency>
 
+        <!-- OpenAPI / Swagger UI. 1.5.x is the line compatible with Spring Boot 2.3.x. -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.5.13</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

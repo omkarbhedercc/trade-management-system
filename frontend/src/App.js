@@ -1,6 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
+import DemoInfoButton from "./components/DemoInfoButton";
 import Dashboard from "./pages/Dashboard";
 import Trades from "./pages/Trades";
 import BookTrade from "./pages/BookTrade";
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="/accounts" component={Accounts} />
         </Switch>
       </div>
+      <DemoInfoButton />
     </div>
   );
 }

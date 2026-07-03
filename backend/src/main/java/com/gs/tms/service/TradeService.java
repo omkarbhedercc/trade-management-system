@@ -9,6 +9,8 @@ import com.gs.tms.exception.ResourceNotFoundException;
 import com.gs.tms.repository.AccountRepository;
 import com.gs.tms.repository.InstrumentRepository;
 import com.gs.tms.repository.TradeRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,11 +18,14 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
 public class TradeService {
+
+    private static final Logger log = LogManager.getLogger(TradeService.class);
 
     private final TradeRepository tradeRepo;
     private final InstrumentRepository instrumentRepo;
@@ -55,6 +60,17 @@ public class TradeService {
                 .orElseThrow(() -> new ResourceNotFoundException("Instrument not found: " + req.getInstrumentId()));
         Account account = accountRepo.findById(req.getAccountId())
                 .orElseThrow(() -> new ResourceNotFoundException("Account not found: " + req.getAccountId()));
+
+        // Reject a zero reference price before booking.
+        if (req.getPrice() == BigDecimal.ZERO) {
+            throw new IllegalArgumentException("price must be a set reference price");
+        }
+
+        // Resolve the instrument's settlement currency from reference data for the audit log.
+        Optional<Instrument> settlementRef = instrumentRepo.findById(req.getInstrumentId());
+        String settlementCcy = settlementRef.get().getCurrency();
+        log.info("Booking {} {} of instrument {} @ {} settling in {}",
+                req.getSide(), req.getQuantity(), req.getInstrumentId(), req.getPrice(), settlementCcy);
 
         Trade trade = new Trade();
         trade.setInstrumentId(instrument.getId());

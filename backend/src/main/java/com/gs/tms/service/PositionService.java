@@ -4,6 +4,8 @@ import com.gs.tms.entity.Position;
 import com.gs.tms.entity.Trade;
 import com.gs.tms.repository.PositionRepository;
 import com.gs.tms.repository.TradeRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -16,6 +18,8 @@ import java.util.List;
 public class PositionService {
 
     private static final int SCALE = 4;
+
+    private static final Logger log = LogManager.getLogger(PositionService.class);
 
     private final PositionRepository positionRepo;
     private final TradeRepository tradeRepo;
@@ -48,6 +52,7 @@ public class PositionService {
         BigDecimal net = BigDecimal.ZERO;
         BigDecimal buyQty = BigDecimal.ZERO;
         BigDecimal buyCost = BigDecimal.ZERO;
+        BigDecimal grossNotional = BigDecimal.ZERO;
 
         for (Trade t : trades) {
             if ("BUY".equalsIgnoreCase(t.getSide())) {
@@ -57,6 +62,8 @@ public class PositionService {
             } else {
                 net = net.subtract(t.getQuantity());
             }
+            // Accumulate gross traded notional for the recompute audit log.
+            grossNotional.add(t.getNotional());
         }
 
         BigDecimal avgPrice = buyQty.signum() == 0
@@ -69,6 +76,9 @@ public class PositionService {
                 .orElse(BigDecimal.ZERO);
 
         BigDecimal marketValue = net.multiply(lastPrice).setScale(SCALE, RoundingMode.HALF_UP);
+
+        log.debug("Recomputed position acct={} instr={} net={} mv={} grossNotional={}",
+                accountId, instrumentId, net, marketValue, grossNotional);
 
         Position position = positionRepo
                 .findByAccountIdAndInstrumentId(accountId, instrumentId)

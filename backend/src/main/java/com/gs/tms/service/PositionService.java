@@ -63,7 +63,7 @@ public class PositionService {
                 net = net.subtract(t.getQuantity());
             }
             // Accumulate gross traded notional for the recompute audit log.
-            grossNotional.add(t.getNotional());
+            grossNotional = grossNotional.add(t.getNotional());
         }
 
         BigDecimal avgPrice = buyQty.signum() == 0

@@ -9,20 +9,32 @@ Start the full TMS dev environment: PostgreSQL container + tmux session with fro
 
 Ports: frontend **4000**, backend **4001**, database **4002 → 5432**.
 
+> First run `/setup-dev` on a fresh machine — it installs prerequisites, the container engine,
+> the Postgres image, frontend deps, and the Maven cache. This command assumes those are in place.
+
 ### Step 1: Manage Postgres Container
+
+Detect the container engine (podman preferred, docker fallback) and reuse it:
+
+```bash
+ENGINE=$(command -v podman >/dev/null 2>&1 && echo podman || echo docker)
+# macOS podman needs its VM running:
+[ "$ENGINE" = "podman" ] && [ "$(uname -s)" = "Darwin" ] && podman machine start 2>/dev/null || true
+echo "engine: $ENGINE"
+```
 
 Container name `tms-postgres` persists data across restarts.
 
 **Check if it exists (stopped or running):**
 
 ```bash
-podman ps -a --format "{{.Names}}" | grep -E "^tms-postgres$"
+$ENGINE ps -a --format "{{.Names}}" | grep -E "^tms-postgres$"
 ```
 
 **If it does NOT exist, create it:**
 
 ```bash
-podman run -d --name tms-postgres \
+$ENGINE run -d --name tms-postgres \
   -e POSTGRES_DB=tms_dev \
   -e POSTGRES_USER=tms \
   -e POSTGRES_PASSWORD=tms \
@@ -33,14 +45,14 @@ podman run -d --name tms-postgres \
 **If it exists but is stopped, start it:**
 
 ```bash
-podman start tms-postgres
+$ENGINE start tms-postgres
 ```
 
 **Wait for PostgreSQL to be ready:**
 
 ```bash
 for i in {1..30}; do
-  podman exec tms-postgres pg_isready -U tms && break
+  $ENGINE exec tms-postgres pg_isready -U tms && break
   sleep 1
 done
 ```
@@ -53,9 +65,12 @@ done
    - Frontend (pane 0): React dev server on port 4000
    - Backend (pane 1): Spring Boot on port 4001
 
-4. **Start services if not running:**
-   - Pane 0 (frontend): `cd /Users/omkarbhede/Documents/PROJECTS/trade-management-system/frontend && npm start`
-   - Pane 1 (backend): `cd /Users/omkarbhede/Documents/PROJECTS/trade-management-system/backend && mvn spring-boot:run`
+4. **Start services if not running** (paths resolved from the repo root; the frontend adds the
+   OpenSSL legacy flag only on Node ≥ 17):
+   - Pane 0 (frontend):
+     `cd "$(git rev-parse --show-toplevel)/frontend" && [ "$(node -p 'process.versions.node.split(".")[0]')" -ge 17 ] && export NODE_OPTIONS=--openssl-legacy-provider; npm start`
+   - Pane 1 (backend):
+     `cd "$(git rev-parse --show-toplevel)/backend" && mvn spring-boot:run`
 
 ### Step 3: Report Status
 

@@ -9,16 +9,19 @@ Restart frontend and backend. Ensure the postgres container and tmux session exi
 
 ### Step 1: Ensure Container Is Running
 
+Detect the engine (podman preferred, docker fallback):
+
 ```bash
-podman ps --format "{{.Names}}" | grep -E "^tms-postgres$"
+ENGINE=$(command -v podman >/dev/null 2>&1 && echo podman || echo docker)
+$ENGINE ps --format "{{.Names}}" | grep -E "^tms-postgres$"
 ```
 
 - If running → leave it alone.
-- If it exists but is stopped → `podman start tms-postgres`
+- If it exists but is stopped → `$ENGINE start tms-postgres`
 - If it does not exist → create it (same as `/start-dev` Step 1):
 
 ```bash
-podman run -d --name tms-postgres \
+$ENGINE run -d --name tms-postgres \
   -e POSTGRES_DB=tms_dev \
   -e POSTGRES_USER=tms \
   -e POSTGRES_PASSWORD=tms \
@@ -30,7 +33,7 @@ podman run -d --name tms-postgres \
 
 ```bash
 for i in {1..30}; do
-  podman exec tms-postgres pg_isready -U tms && break
+  $ENGINE exec tms-postgres pg_isready -U tms && break
   sleep 1
 done
 ```
@@ -48,15 +51,15 @@ done
 For each pane, send Ctrl+C, wait, then send the start command:
 
 ```bash
-# Frontend (pane 0)
+# Frontend (pane 0) — repo-relative path; OpenSSL legacy flag only on Node >= 17
 tmux send-keys -t tms:0.0 C-c
 sleep 1
-tmux send-keys -t tms:0.0 'cd /Users/omkarbhede/Documents/PROJECTS/trade-management-system/frontend && npm start' Enter
+tmux send-keys -t tms:0.0 'cd "$(git rev-parse --show-toplevel)/frontend" && [ "$(node -p "process.versions.node.split(\".\")[0]")" -ge 17 ] && export NODE_OPTIONS=--openssl-legacy-provider; npm start' Enter
 
 # Backend (pane 1)
 tmux send-keys -t tms:0.1 C-c
 sleep 1
-tmux send-keys -t tms:0.1 'cd /Users/omkarbhede/Documents/PROJECTS/trade-management-system/backend && mvn spring-boot:run' Enter
+tmux send-keys -t tms:0.1 'cd "$(git rev-parse --show-toplevel)/backend" && mvn spring-boot:run' Enter
 ```
 
 ### Step 4: Verify & Report

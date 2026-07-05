@@ -18,7 +18,8 @@ Stop all services: kill the tmux session and stop the postgres container (don't 
 Stop (don't remove — preserves data for next `/start-dev`):
 
 ```bash
-podman stop tms-postgres 2>/dev/null || true
+ENGINE=$(command -v podman >/dev/null 2>&1 && echo podman || echo docker)
+$ENGINE stop tms-postgres 2>/dev/null || true
 ```
 
 ### Step 3: Report Status

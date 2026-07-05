@@ -9,9 +9,6 @@ spring:
     username: tms
     password: tms
     driver-class-name: org.postgresql.Driver
-    # Run schema.sql + data.sql against the (non-embedded) Postgres datasource.
-    initialization-mode: always
-    platform: postgresql
   jpa:
     hibernate:
       # Schema is owned by schema.sql (script init runs before Hibernate in Boot 2.3.x),
@@ -22,3 +19,5 @@ spring:
       hibernate:
         format_sql: true
     open-in-view: false
+  sql.init.mode: always
+  sql.init.platform: postgresql

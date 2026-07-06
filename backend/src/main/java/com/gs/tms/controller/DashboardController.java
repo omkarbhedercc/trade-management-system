@@ -29,9 +29,9 @@ public class DashboardController {
     private final AccountRepository accountRepo;
 
     public DashboardController(TradeRepository tradeRepo,
-                              PositionRepository positionRepo,
-                              InstrumentRepository instrumentRepo,
-                              AccountRepository accountRepo) {
+            PositionRepository positionRepo,
+            InstrumentRepository instrumentRepo,
+            AccountRepository accountRepo) {
         this.tradeRepo = tradeRepo;
         this.positionRepo = positionRepo;
         this.instrumentRepo = instrumentRepo;

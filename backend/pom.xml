@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.4.RELEASE</version>
+        <version>3.0.13</version>
         <relativePath/>
     </parent>
 
@@ -18,13 +18,14 @@
     <description>Trade Management System backend (legacy-styled demo target)</description>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>21</java.version>
         <!--
           Align the whole Jackson family to 2.9.x so the jsr310/jdk8 modules match the
           intentionally-vulnerable jackson-databind 2.9.10.4 pinned below. Spring Boot 2.3.4
           ships Jackson 2.11, which is binary-incompatible with databind 2.9.x.
         -->
         <jackson-bom.version>2.9.10</jackson-bom.version>
+        <maven.compiler.release>21</maven.compiler.release>
     </properties>
 
     <dependencies>
@@ -48,12 +49,10 @@
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-            <version>2.14.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
-            <version>2.14.1</version>
         </dependency>
 
         <!-- Data JPA -->
@@ -66,7 +65,6 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.2.5</version>
         </dependency>
 
         <!-- Old jackson-databind (deserialization CVEs) -->
@@ -80,7 +78,6 @@
         <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
-            <version>1.27</version>
         </dependency>
 
         <!-- Old commons-collections (deserialization gadget) -->
@@ -93,8 +90,8 @@
         <!-- OpenAPI / Swagger UI. 1.5.x is the line compatible with Spring Boot 2.3.x. -->
         <dependency>
             <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-ui</artifactId>
-            <version>1.5.13</version>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.8.17</version>
         </dependency>
 
         <dependency>

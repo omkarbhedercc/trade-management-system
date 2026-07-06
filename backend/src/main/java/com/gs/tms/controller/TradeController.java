@@ -33,8 +33,8 @@ public class TradeController {
 
     @GetMapping
     public List<TradeResponse> list(@RequestParam(required = false) Long accountId,
-                                    @RequestParam(required = false) Long instrumentId,
-                                    @RequestParam(required = false) String status) {
+            @RequestParam(required = false) Long instrumentId,
+            @RequestParam(required = false) String status) {
         return service.search(accountId, instrumentId, status);
     }
 

@@ -12,21 +12,51 @@ public class BookTradeRequest {
     private BigDecimal price;
     private LocalDate tradeDate;
 
-    public Long getInstrumentId() { return instrumentId; }
-    public void setInstrumentId(Long instrumentId) { this.instrumentId = instrumentId; }
+    public Long getInstrumentId() {
+        return instrumentId;
+    }
 
-    public Long getAccountId() { return accountId; }
-    public void setAccountId(Long accountId) { this.accountId = accountId; }
+    public void setInstrumentId(Long instrumentId) {
+        this.instrumentId = instrumentId;
+    }
 
-    public String getSide() { return side; }
-    public void setSide(String side) { this.side = side; }
+    public Long getAccountId() {
+        return accountId;
+    }
 
-    public BigDecimal getQuantity() { return quantity; }
-    public void setQuantity(BigDecimal quantity) { this.quantity = quantity; }
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
+    }
 
-    public BigDecimal getPrice() { return price; }
-    public void setPrice(BigDecimal price) { this.price = price; }
+    public String getSide() {
+        return side;
+    }
 
-    public LocalDate getTradeDate() { return tradeDate; }
-    public void setTradeDate(LocalDate tradeDate) { this.tradeDate = tradeDate; }
+    public void setSide(String side) {
+        this.side = side;
+    }
+
+    public BigDecimal getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(BigDecimal quantity) {
+        this.quantity = quantity;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public LocalDate getTradeDate() {
+        return tradeDate;
+    }
+
+    public void setTradeDate(LocalDate tradeDate) {
+        this.tradeDate = tradeDate;
+    }
 }

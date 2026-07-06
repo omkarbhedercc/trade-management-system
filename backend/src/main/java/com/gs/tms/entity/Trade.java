@@ -1,11 +1,11 @@
 package com.gs.tms.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -48,36 +48,91 @@ public class Trade {
     @Column(name = "booked_at", insertable = false, updatable = false)
     private LocalDateTime bookedAt;
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getTradeRef() { return tradeRef; }
-    public void setTradeRef(String tradeRef) { this.tradeRef = tradeRef; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public Long getInstrumentId() { return instrumentId; }
-    public void setInstrumentId(Long instrumentId) { this.instrumentId = instrumentId; }
+    public String getTradeRef() {
+        return tradeRef;
+    }
 
-    public Long getAccountId() { return accountId; }
-    public void setAccountId(Long accountId) { this.accountId = accountId; }
+    public void setTradeRef(String tradeRef) {
+        this.tradeRef = tradeRef;
+    }
 
-    public String getSide() { return side; }
-    public void setSide(String side) { this.side = side; }
+    public Long getInstrumentId() {
+        return instrumentId;
+    }
 
-    public BigDecimal getQuantity() { return quantity; }
-    public void setQuantity(BigDecimal quantity) { this.quantity = quantity; }
+    public void setInstrumentId(Long instrumentId) {
+        this.instrumentId = instrumentId;
+    }
 
-    public BigDecimal getPrice() { return price; }
-    public void setPrice(BigDecimal price) { this.price = price; }
+    public Long getAccountId() {
+        return accountId;
+    }
 
-    public BigDecimal getNotional() { return notional; }
-    public void setNotional(BigDecimal notional) { this.notional = notional; }
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
+    }
 
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public String getSide() {
+        return side;
+    }
 
-    public LocalDate getTradeDate() { return tradeDate; }
-    public void setTradeDate(LocalDate tradeDate) { this.tradeDate = tradeDate; }
+    public void setSide(String side) {
+        this.side = side;
+    }
 
-    public LocalDateTime getBookedAt() { return bookedAt; }
-    public void setBookedAt(LocalDateTime bookedAt) { this.bookedAt = bookedAt; }
+    public BigDecimal getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(BigDecimal quantity) {
+        this.quantity = quantity;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public BigDecimal getNotional() {
+        return notional;
+    }
+
+    public void setNotional(BigDecimal notional) {
+        this.notional = notional;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public LocalDate getTradeDate() {
+        return tradeDate;
+    }
+
+    public void setTradeDate(LocalDate tradeDate) {
+        this.tradeDate = tradeDate;
+    }
+
+    public LocalDateTime getBookedAt() {
+        return bookedAt;
+    }
+
+    public void setBookedAt(LocalDateTime bookedAt) {
+        this.bookedAt = bookedAt;
+    }
 }

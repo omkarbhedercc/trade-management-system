@@ -43,17 +43,55 @@ public class TradeResponse {
         return r;
     }
 
-    public Long getId() { return id; }
-    public String getTradeRef() { return tradeRef; }
-    public Long getInstrumentId() { return instrumentId; }
-    public String getInstrumentTicker() { return instrumentTicker; }
-    public Long getAccountId() { return accountId; }
-    public String getAccountNumber() { return accountNumber; }
-    public String getSide() { return side; }
-    public BigDecimal getQuantity() { return quantity; }
-    public BigDecimal getPrice() { return price; }
-    public BigDecimal getNotional() { return notional; }
-    public String getStatus() { return status; }
-    public LocalDate getTradeDate() { return tradeDate; }
-    public LocalDateTime getBookedAt() { return bookedAt; }
+    public Long getId() {
+        return id;
+    }
+
+    public String getTradeRef() {
+        return tradeRef;
+    }
+
+    public Long getInstrumentId() {
+        return instrumentId;
+    }
+
+    public String getInstrumentTicker() {
+        return instrumentTicker;
+    }
+
+    public Long getAccountId() {
+        return accountId;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public String getSide() {
+        return side;
+    }
+
+    public BigDecimal getQuantity() {
+        return quantity;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public BigDecimal getNotional() {
+        return notional;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public LocalDate getTradeDate() {
+        return tradeDate;
+    }
+
+    public LocalDateTime getBookedAt() {
+        return bookedAt;
+    }
 }

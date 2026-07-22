@@ -24,6 +24,6 @@ public interface TradeRepository extends JpaRepository<Trade, Long> {
             + "(:status is null or t.status = :status) "
             + "order by t.bookedAt desc")
     List<Trade> search(@Param("accountId") Long accountId,
-                       @Param("instrumentId") Long instrumentId,
-                       @Param("status") String status);
+            @Param("instrumentId") Long instrumentId,
+            @Param("status") String status);
 }

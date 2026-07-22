@@ -1,12 +1,12 @@
 package com.gs.tms.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -37,24 +37,59 @@ public class Position {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public Long getAccountId() { return accountId; }
-    public void setAccountId(Long accountId) { this.accountId = accountId; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public Long getInstrumentId() { return instrumentId; }
-    public void setInstrumentId(Long instrumentId) { this.instrumentId = instrumentId; }
+    public Long getAccountId() {
+        return accountId;
+    }
 
-    public BigDecimal getNetQuantity() { return netQuantity; }
-    public void setNetQuantity(BigDecimal netQuantity) { this.netQuantity = netQuantity; }
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
+    }
 
-    public BigDecimal getAvgPrice() { return avgPrice; }
-    public void setAvgPrice(BigDecimal avgPrice) { this.avgPrice = avgPrice; }
+    public Long getInstrumentId() {
+        return instrumentId;
+    }
 
-    public BigDecimal getMarketValue() { return marketValue; }
-    public void setMarketValue(BigDecimal marketValue) { this.marketValue = marketValue; }
+    public void setInstrumentId(Long instrumentId) {
+        this.instrumentId = instrumentId;
+    }
 
-    public LocalDateTime getUpdatedAt() { return updatedAt; }
-    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+    public BigDecimal getNetQuantity() {
+        return netQuantity;
+    }
+
+    public void setNetQuantity(BigDecimal netQuantity) {
+        this.netQuantity = netQuantity;
+    }
+
+    public BigDecimal getAvgPrice() {
+        return avgPrice;
+    }
+
+    public void setAvgPrice(BigDecimal avgPrice) {
+        this.avgPrice = avgPrice;
+    }
+
+    public BigDecimal getMarketValue() {
+        return marketValue;
+    }
+
+    public void setMarketValue(BigDecimal marketValue) {
+        this.marketValue = marketValue;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }

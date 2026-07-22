@@ -33,9 +33,9 @@ public class TradeService {
     private final PositionService positionService;
 
     public TradeService(TradeRepository tradeRepo,
-                        InstrumentRepository instrumentRepo,
-                        AccountRepository accountRepo,
-                        PositionService positionService) {
+            InstrumentRepository instrumentRepo,
+            AccountRepository accountRepo,
+            PositionService positionService) {
         this.tradeRepo = tradeRepo;
         this.instrumentRepo = instrumentRepo;
         this.accountRepo = accountRepo;
@@ -49,7 +49,7 @@ public class TradeService {
     public TradeResponse findById(Long id) {
         Trade t = tradeRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Trade not found: " + id));
-        return enrich(java.util.Collections.singletonList(t)).get(0);
+        return enrich(java.util.Collections.singletonList(t)).getFirst();
     }
 
     @Transactional
@@ -85,12 +85,12 @@ public class TradeService {
 
         // Save once to obtain the generated id, then derive a stable, unique trade_ref from it.
         trade = tradeRepo.save(trade);
-        trade.setTradeRef(String.format("TRD-%06d", trade.getId()));
+        trade.setTradeRef("TRD-%06d".formatted(trade.getId()));
         trade = tradeRepo.save(trade);
 
         positionService.recompute(account.getId(), instrument.getId());
 
-        return enrich(java.util.Collections.singletonList(trade)).get(0);
+        return enrich(java.util.Collections.singletonList(trade)).getFirst();
     }
 
     @Transactional
@@ -105,7 +105,7 @@ public class TradeService {
 
         positionService.recompute(trade.getAccountId(), trade.getInstrumentId());
 
-        return enrich(java.util.Collections.singletonList(trade)).get(0);
+        return enrich(java.util.Collections.singletonList(trade)).getFirst();
     }
 
     private void validate(BookTradeRequest req) {
